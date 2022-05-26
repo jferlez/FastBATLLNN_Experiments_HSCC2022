@@ -71,7 +71,7 @@ printf "Results are dumped in $out_fname\n"
 
 
 printf "Running experiment from file ${EXPERIMENT}\n"
-charmrun +p$CORES $PYTHON ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> $LOG_FILE || exit
+charmrun +p$CORES "${PYTHON}" ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> $LOG_FILE || exit
 
 # 0..29; 0..19
 # for net_idx in {0..0}
