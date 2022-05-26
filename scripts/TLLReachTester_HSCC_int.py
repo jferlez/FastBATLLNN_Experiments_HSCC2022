@@ -38,7 +38,7 @@ def main(args):
     
     dirName = os.path.dirname(experimentFile)
 
-    pes = {'poset':[(0,NUM_CORES-1,1)],'hash':[(NUM_CORES-1,NUM_CORES,1)]}
+    pes = {'poset':[(0,NUM_CORES,1)],'hash':[(0,NUM_CORES,1)]}
     total_time = time.time()
     tllReach = Chare(TLLHypercubeReach.TLLHypercubeReach, args=[pes])
     print('Constructor time', str(time.time() - total_time))
