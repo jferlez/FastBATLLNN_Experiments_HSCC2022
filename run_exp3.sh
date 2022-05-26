@@ -20,7 +20,7 @@ TIMEOUT=300
 if [ $SYSTEM_TYPE = "Darwin" ]
 then
     CORES=$(( `sysctl -n hw.ncpu` / 2 ))
-    PYTHON="python3.10"
+    PYTHON="python3.9"
 else
     CORES=$(( `grep 'cpu cores' /proc/cpuinfo | uniq` / 2 ))
     PYTHON=""
@@ -34,7 +34,8 @@ for argwhole in "$@"; do
         --experiment) EXPERIMENT="${val}";;
         --logdir) LOG_DIR="${val}";;
         --timeout) TIMEOUT="${val}";;
-        --cores) CORES="${val}"
+        --cores) CORES="${val}";;
+        --python) PYTHON="${val}"
     esac
 done
 
