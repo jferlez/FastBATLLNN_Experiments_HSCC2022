@@ -41,6 +41,11 @@ for argwhole in "$@"; do
     esac
 done
 
+if [ $SYSTEM_TYPE != "Darwin" ] && [ $PYTHON != "" ]
+then
+    echo "Setting python interpreter is not supported on Linux. Ignoring --python option."
+fi
+
 if [ ! -e "${EXPERIMENT}" ]
 then
     echo "Invalid experiment file specified. ${EXPERIMENT}" >&2; exit 1
@@ -68,7 +73,12 @@ printf "Results are dumped in $out_fname\n"
 
 
 printf "Running experiment from file ${EXPERIMENT}\n"
-charmrun +p$CORES "${PYTHON}" ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> "${LOG_FILE}" || exit
+if [ $SYSTEM_TYPE = "Darwin" ]
+then
+    charmrun +p$CORES "${PYTHON}" ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> "${LOG_FILE}" || exit
+else
+    charmrun +p$CORES ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> "${LOG_FILE}" || exit
+fi
 
 # 0..29; 0..19
 # for net_idx in {0..0}
