@@ -55,23 +55,18 @@ if ! [[ $CORES =~ $re ]] ; then
     echo "Invalid core count specified" >&2; exit 1
 fi
 BASE_NAME=`echo "${EXPERIMENT}" | sed -E -e 's/^(.*\/)?([^/]*)(\.[^\.]*)$/\2/'`
-#Experiment 1
-TIMEOUT=300
-if [ $# == 1 ]; then 
-    TIMEOUT=$1
-fi
 
 out_fname="${LOG_DIR}/${BASE_NAME}_${NUM_CORES}_${TIMEOUT}sec.txt"
 LOG_FILE="${LOG_DIR}/${BASE_NAME}_${NUM_CORES}_${TIMEOUT}sec_log.txt"
-> $out_fname
-> $LOG_FILE
+> "${out_fname}"
+> "${LOG_FILE}"
 
 printf "Logs are dumped in $LOG_FILE\n"
 printf "Results are dumped in $out_fname\n"
 
 
 printf "Running experiment from file ${EXPERIMENT}\n"
-charmrun +p$CORES "${PYTHON}" ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> $LOG_FILE || exit
+charmrun +p$CORES "${PYTHON}" ./scripts/TLLReachTester_HSCC_int.py "${EXPERIMENT}" "${out_fname}" $CORES $TIMEOUT >> "${LOG_FILE}" || exit
 
 # 0..29; 0..19
 # for net_idx in {0..0}
