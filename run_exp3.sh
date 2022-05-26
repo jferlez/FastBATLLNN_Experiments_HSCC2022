@@ -22,7 +22,9 @@ then
     CORES=$(( `sysctl -n hw.ncpu` / 2 ))
     PYTHON="python3.9"
 else
-    CORES=$(( `grep 'cpu cores' /proc/cpuinfo | uniq` / 2 ))
+    CORES_PER_SOCKET=`lscpu | grep "Core(s) per socket:" | sed -e 's/[^0-9]//g'`
+    SOCKETS=`lscpu | grep "Socket(s):" | sed -e 's/[^0-9]//g'`
+    CORES=$(( $CORES_PER_SOCKET * $SOCKETS ))
     PYTHON=""
 fi
 
