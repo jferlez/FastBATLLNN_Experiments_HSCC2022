@@ -20,7 +20,7 @@ TIMEOUT=300
 if [ $SYSTEM_TYPE = "Darwin" ]
 then
     CORES=$(( `sysctl -n hw.ncpu` / 2 ))
-    PYTHON="python3.9"
+    PYTHON="python3.10"
 else
     CORES_PER_SOCKET=`lscpu | grep "Core(s) per socket:" | sed -e 's/[^0-9]//g'`
     SOCKETS=`lscpu | grep "Socket(s):" | sed -e 's/[^0-9]//g'`
