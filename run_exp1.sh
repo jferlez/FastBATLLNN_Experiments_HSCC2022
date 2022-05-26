@@ -41,7 +41,7 @@ for argwhole in "$@"; do
     esac
 done
 
-if [ $SYSTEM_TYPE != "Darwin" ] && [ $PYTHON != "" ]
+if [ ! $SYSTEM_TYPE = "Darwin" ] && [ ! $PYTHON = "" ]
 then
     echo "Setting python interpreter is not supported on Linux. Ignoring --python option."
 fi
