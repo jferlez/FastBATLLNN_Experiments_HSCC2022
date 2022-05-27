@@ -28,6 +28,8 @@ else
     PYTHON=""
 fi
 
+echo "Detected ${CORES} physical CPU cores."
+
 for argwhole in "$@"; do
     IFS='=' read -r -a array <<< "$argwhole"
     arg="${array[0]}"
