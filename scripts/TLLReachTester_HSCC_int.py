@@ -82,7 +82,16 @@ def main(args):
         else:
             # x >= b
             print(f'-----Verifying  NN >= {b_out}-----')
-            lbFut = tllReach.verifyLB(b_out,timeout=(None if TIMEOUT == 0 else TIMEOUT),method='fastLP',ret=True) # verify NN >= b not negated
+            optsDict = { \
+                        'method':'fastLP', \
+                        'solver':'glpk', \
+                        'findAll':False, \
+                        'useBounding':False, \
+                        'useQuery':False, \
+                        'hashStoreUseBits':True, \
+                        'prefilter':False \
+                    }
+            lbFut = tllReach.verifyLB(b_out,timeout=(None if TIMEOUT == 0 else TIMEOUT),opts=optsDict,ret=True) # verify NN >= b not negated
             res = lbFut.get()
             if res is not None: res = bool(res)
         if res is None:
