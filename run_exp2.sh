@@ -31,7 +31,8 @@ fi
 for argwhole in "$@"; do
     IFS='=' read -r -a array <<< "$argwhole"
     arg="${array[0]}"
-    val="${array[1]}"
+    val=$(printf "=%s" "${array[@]:1}")
+    val=${val:1}
     case "$arg" in
         --experiment) EXPERIMENT="${val}";;
         --logdir) LOG_DIR="${val}";;
