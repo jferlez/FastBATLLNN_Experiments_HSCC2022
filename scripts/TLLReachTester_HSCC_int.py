@@ -86,7 +86,6 @@ def main(args):
                         'method':'fastLP', \
                         'solver':'glpk', \
                         'findAll':False, \
-                        'useBounding':False, \
                         'useQuery':False, \
                         'hashStoreUseBits':True, \
                         'prefilter':False \
